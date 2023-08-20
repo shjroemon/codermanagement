@@ -1,20 +1,14 @@
 const mongoose = require("mongoose");
-//Create schema
-const userSchema = mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    role: {
-      type: String,
-      enum: ["manager", "employee"],
-      default: "employee"
-    },
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
-    isDeleted: { type: Boolean, default: false, required: true }
+
+const userScherma = mongoose.Schema({
+  name: { type: String, required: true },
+  role: {
+    type: String,
+    enum: ["employee", "manage"],
+    default: "employee",
+    require: true,
   },
-  {
-    timestamps: true
-  }
-);
-//Create and export model
-const User = mongoose.model("User", userSchema);
+  isDeleted: { type: Boolean, default: false },
+});
+const User = mongoose.model("User", userScherma);
 module.exports = User;
